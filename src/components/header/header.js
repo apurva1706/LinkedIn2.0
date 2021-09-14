@@ -1,0 +1,46 @@
+import React from "react";
+import SearchIcon from "@material-ui/icons/Search";
+import "./header.css";
+import HeaderOption from "./headerOption";
+import HomeIcon from '@material-ui/icons/Home';
+import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
+import BusinessCenterIcon from '@material-ui/icons/BusinessCenter';
+import ChatIcon from '@material-ui/icons/Chat';
+import NotificationsIcon from '@material-ui/icons/Notifications';
+import { useDispatch, useSelector } from "react-redux";
+import { logout, selectUser } from "../../features/userSlice";
+import { auth } from "../../firebase";
+
+
+function Header() {
+  
+  const dispatch=useDispatch();
+  const logoutFromApp=()=>{
+    dispatch(logout());
+    auth.signOut();
+  }
+  return (
+    <div className="header">
+      <div className="header_left">
+        <img
+          src="data:image/jpeg;base64,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"
+          alt="LinkedIn Icon"
+        />
+        <div className="header_search">
+          <SearchIcon />
+          <input type="text" placeholder="Search" autoComplete="on"/>
+        </div>
+      </div>
+      <div className="header_right">
+        <HeaderOption Icon={HomeIcon}title="Home"/>
+        <HeaderOption Icon={SupervisorAccountIcon}title="My Network"/>
+        <HeaderOption Icon={BusinessCenterIcon} title="Jobs"/>
+        <HeaderOption Icon={ChatIcon} title="Messaging"/>
+        <HeaderOption Icon={NotificationsIcon} title="Notifications"/>
+        <HeaderOption onClick={logoutFromApp} avatar={true} title="Me"/>
+      </div>
+    </div>
+  );
+}
+
+export default Header;
